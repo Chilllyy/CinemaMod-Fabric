@@ -8,8 +8,8 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.TextFieldWidget;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableTextContent;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 
@@ -18,7 +18,7 @@ import java.util.Locale;
 public class VideoHistoryScreen extends Screen {
 
     protected static final Identifier TEXTURE = new Identifier("textures/gui/social_interactions.png");
-    protected static final Text SEARCH_TEXT = (new TranslatableTextContent("gui.socialInteractions.search_hint")).formatted(Formatting.ITALIC).formatted(Formatting.GRAY);
+    protected static final Text SEARCH_TEXT = ((MutableText) Text.of("gui.socialInteractions.search_hint")).formatted(Formatting.ITALIC).formatted(Formatting.GRAY);
 
     private TextFieldWidget searchBox;
     private VideoListWidget videoListWidget;
