@@ -6,6 +6,7 @@ import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import org.cef.CefApp;
 import org.cef.CefClient;
 import org.cef.CefSettings;
+import org.cef.CefSettings.ColorType;
 import org.cef.browser.CefBrowserOsr;
 
 public final class CefUtil {

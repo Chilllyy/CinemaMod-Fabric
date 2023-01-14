@@ -11,7 +11,7 @@ import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.render.*;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.text.LiteralText;
+import net.minecraft.text.LiteralTextContent;
 import net.minecraft.text.Text;
 import org.cef.browser.CefBrowserOsr;
 import org.lwjgl.glfw.GLFW;
@@ -41,20 +41,20 @@ public class VideoRequestBrowser extends Screen {
 
         browser.resize(client.getWindow().getWidth(), client.getWindow().getHeight() - scaleY(20));
 
-        addDrawableChild(backBtn = (new ButtonWidget(browserDrawOffset, browserDrawOffset - 20, 20, 20, new LiteralText("<"), button -> {
+        addDrawableChild(backBtn = (new ButtonWidget(browserDrawOffset, browserDrawOffset - 20, 20, 20, new LiteralTextContent("<"), button -> {
             System.out.println("back button");
         })));
-        addDrawableChild(fwdBtn = (new ButtonWidget(browserDrawOffset + 20, browserDrawOffset - 20, 20, 20, new LiteralText(">"), button -> {
+        addDrawableChild(fwdBtn = (new ButtonWidget(browserDrawOffset + 20, browserDrawOffset - 20, 20, 20, new LiteralTextContent(">"), button -> {
             System.out.println("fwd button");
         })));
-        addDrawableChild(requestBtn = (new ButtonWidget(width - browserDrawOffset - 20 - 60, browserDrawOffset - 20, 60, 20, new LiteralText("Request"), button -> {
+        addDrawableChild(requestBtn = (new ButtonWidget(width - browserDrawOffset - 20 - 60, browserDrawOffset - 20, 60, 20, new LiteralTextContent("Request"), button -> {
             System.out.println("request button");
         })));
-        addDrawableChild(closeBtn = (new ButtonWidget(width - browserDrawOffset - 20, browserDrawOffset - 20, 20, 20, new LiteralText("X"), button -> {
+        addDrawableChild(closeBtn = (new ButtonWidget(width - browserDrawOffset - 20, browserDrawOffset - 20, 20, 20, new LiteralTextContent("X"), button -> {
             System.out.println("close button");
         })));
 
-        urlField = new TextFieldWidget(client.textRenderer, browserDrawOffset + 40, browserDrawOffset - 20 + 1, width - browserDrawOffset - 160, 20, new LiteralText(""));
+        urlField = new TextFieldWidget(client.textRenderer, browserDrawOffset + 40, browserDrawOffset - 20 + 1, width - browserDrawOffset - 160, 20, new LiteralTextContent(""));
         urlField.setMaxLength(65535);
         urlField.setText(browser.getURL()); // why does getURL return an empty string here?
     }
