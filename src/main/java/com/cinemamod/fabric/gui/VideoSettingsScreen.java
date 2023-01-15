@@ -71,10 +71,6 @@ public class VideoSettingsScreen extends Screen {
         return this.method_31359() / 16;
     }
 
-    private int method_31361() {
-        return 80 + this.method_31360() * 16 - 8;
-    }
-
     private int method_31362() {
         return (this.width - 238) / 2;
     }
