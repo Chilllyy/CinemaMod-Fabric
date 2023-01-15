@@ -30,7 +30,7 @@ public class VideoHistoryScreen extends Screen {
 
     @Override
     protected void init() {
-        client.keyboard.setRepeatEvents(true);
+        //client.keyboard.setRepeatEvents(true);
         String string = searchBox != null ? searchBox.getText() : "";
         searchBox = new TextFieldWidget(textRenderer, method_31362() + 28, 78, 196, 16, SEARCH_TEXT);
         searchBox.setMaxLength(16);
@@ -46,7 +46,7 @@ public class VideoHistoryScreen extends Screen {
 
     @Override
     public void removed() {
-        client.keyboard.setRepeatEvents(false);
+        //client.keyboard.setRepeatEvents(false);
     }
 
     @Override
@@ -72,7 +72,7 @@ public class VideoHistoryScreen extends Screen {
         this.renderBackground(matrices);
         videoListWidget.render(matrices, mouseX, mouseY, delta);
         if (!this.searchBox.isFocused() && this.searchBox.getText().isEmpty()) {
-            drawTextWithShadow(matrices, this.client.textRenderer, SEARCH_TEXT, this.searchBox.x, this.searchBox.y, -1);
+            drawTextWithShadow(matrices, this.client.textRenderer, SEARCH_TEXT, this.searchBox.getX(), this.searchBox.getY(), -1);
         } else {
             this.searchBox.render(matrices, mouseX, mouseY, delta);
         }
