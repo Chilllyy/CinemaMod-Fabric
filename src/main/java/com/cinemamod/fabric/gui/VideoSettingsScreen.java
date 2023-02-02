@@ -53,12 +53,14 @@ public class VideoSettingsScreen extends Screen {
 
         addDrawableChild(new ButtonWidget(method_31362() + 23, 142 + 32, 196, 20, Text.of("Screen Resolution: " + CinemaModClient.getInstance().getVideoSettings().getBrowserResolution() + "p"), button -> {
             CinemaModClient.getInstance().getVideoSettings().setNextBrowserResolution();
+            button.setMessage(Text.of("Screen Resolution: " + CinemaModClient.getInstance().getVideoSettings().getBrowserResolution() + "p"));
             shouldReloadScreen = true;
         }));
 
 
         addDrawableChild(new ButtonWidget(method_31362() + 23, 142 + 32 + 32, 196, 20, Text.of("Screen refresh rate: " + CinemaModClient.getInstance().getVideoSettings().getBrowserRefreshRate() + " fps"), button -> {
             CinemaModClient.getInstance().getVideoSettings().setNextBrowserRefreshRate();
+            button.setMessage(Text.of("Screen refresh rate: " + CinemaModClient.getInstance().getVideoSettings().getBrowserRefreshRate() + " fps"));
             shouldReloadScreen = true;
         }));
     }

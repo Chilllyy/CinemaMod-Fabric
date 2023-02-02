@@ -50,11 +50,11 @@ public class VideoRequestBrowser extends Screen {
             browser.goForward();
         }));
 
-        addDrawableChild(new ButtonWidget(width - browserDrawOffset + 20, browserDrawOffset - 20, 20, 20, Text.of("Request"), button -> {
+        addDrawableChild(new ButtonWidget(width - browserDrawOffset - 20 - 60, browserDrawOffset - 20, 60, 20, Text.of("Request"), button -> {
             System.out.println("TODO Request Button");
         }));
 
-        addDrawableChild(new ButtonWidget(width - browserDrawOffset, browserDrawOffset - 20, 20, 20, Text.of("X"), button -> {
+        addDrawableChild(new ButtonWidget(width - browserDrawOffset - 20, browserDrawOffset - 20, 20, 20, Text.of("X"), button -> {
             close();
         }));
 
