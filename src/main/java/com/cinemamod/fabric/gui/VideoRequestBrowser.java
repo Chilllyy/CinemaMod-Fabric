@@ -8,7 +8,6 @@ import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.ButtonWidget;
-import net.minecraft.client.gui.widget.ButtonWidget.Builder;
 import net.minecraft.client.gui.widget.TextFieldWidget;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.render.*;
@@ -43,28 +42,21 @@ public class VideoRequestBrowser extends Screen {
 
         if (browser == null) return;
 
-        ButtonWidget.Builder backBtnBuilder = new Builder(Text.of("<"), button -> {
+        addDrawableChild(new ButtonWidget(browserDrawOffset, browserDrawOffset - 20, 20, 20, Text.of("<"), button -> {
             browser.goBack();
-        });
-        ButtonWidget.Builder fwdBtnBuilder = new Builder(Text.of(">"), button -> {
+        }));
+
+        addDrawableChild(new ButtonWidget(browserDrawOffset + 20, browserDrawOffset - 20, 20, 20, Text.of(">"), button -> {
             browser.goForward();
-        });
-        ButtonWidget.Builder requestBtnBuilder = new Builder(Text.of("Request"), button -> {
-            System.out.println("TODO, request button");
-        });
-        ButtonWidget.Builder closeBtnBuilder = new Builder(Text.of("X"), button -> {
+        }));
+
+        addDrawableChild(new ButtonWidget(width - browserDrawOffset + 20, browserDrawOffset - 20, 20, 20, Text.of("Request"), button -> {
+            System.out.println("TODO Request Button");
+        }));
+
+        addDrawableChild(new ButtonWidget(width - browserDrawOffset, browserDrawOffset - 20, 20, 20, Text.of("X"), button -> {
             close();
-        });
-
-        backBtnBuilder.dimensions(browserDrawOffset, browserDrawOffset - 20, 20, 20);
-        fwdBtnBuilder.dimensions(browserDrawOffset + 20, browserDrawOffset - 20, 20, 20);
-        requestBtnBuilder.dimensions(width - browserDrawOffset - 20 - 60, browserDrawOffset - 20, 60, 20);
-        closeBtnBuilder.dimensions(width - browserDrawOffset - 20, browserDrawOffset - 20, 20, 20);
-
-        addDrawableChild(backBtnBuilder.build());
-        addDrawableChild(fwdBtnBuilder.build());
-        addDrawableChild(requestBtnBuilder.build());
-        addDrawableChild(closeBtnBuilder.build());
+        }));
 
         urlField = new TextFieldWidget(client.textRenderer, browserDrawOffset + 40, browserDrawOffset - 20 + 1, width - browserDrawOffset - 160, 20, Text.of(""));
         urlField.setMaxLength(65535);

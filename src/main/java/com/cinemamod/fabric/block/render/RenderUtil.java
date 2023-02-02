@@ -15,7 +15,7 @@ import net.minecraft.util.math.Matrix4f;
 public final class RenderUtil {
 
     public static void fixRotation(MatrixStack matrixStack, String facing) {
-        final Quaternionf rotation;
+        final Quaternion rotation;
 
 
         switch (facing) {
