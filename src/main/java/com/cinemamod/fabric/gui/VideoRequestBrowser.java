@@ -8,6 +8,7 @@ import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.ButtonWidget;
+import net.minecraft.client.gui.widget.ButtonWidget.Builder;
 import net.minecraft.client.gui.widget.TextFieldWidget;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.render.*;
@@ -42,21 +43,28 @@ public class VideoRequestBrowser extends Screen {
 
         if (browser == null) return;
 
-        addDrawableChild(new ButtonWidget(browserDrawOffset, browserDrawOffset - 20, 20, 20, Text.of("<"), button -> {
+        ButtonWidget.Builder backBtnBuilder = new Builder(Text.of("<"), button -> {
             browser.goBack();
-        }));
-
-        addDrawableChild(new ButtonWidget(browserDrawOffset + 20, browserDrawOffset - 20, 20, 20, Text.of(">"), button -> {
+        });
+        ButtonWidget.Builder fwdBtnBuilder = new Builder(Text.of(">"), button -> {
             browser.goForward();
-        }));
-
-        addDrawableChild(new ButtonWidget(width - browserDrawOffset - 20 - 60, browserDrawOffset - 20, 60, 20, Text.of("Request"), button -> {
-            System.out.println("TODO Request Button");
-        }));
-
-        addDrawableChild(new ButtonWidget(width - browserDrawOffset - 20, browserDrawOffset - 20, 20, 20, Text.of("X"), button -> {
+        });
+        ButtonWidget.Builder requestBtnBuilder = new Builder(Text.of("Request"), button -> {
+            System.out.println("TODO, request button");
+        });
+        ButtonWidget.Builder closeBtnBuilder = new Builder(Text.of("X"), button -> {
             close();
-        }));
+        });
+
+        backBtnBuilder.dimensions(browserDrawOffset, browserDrawOffset - 20, 20, 20);
+        fwdBtnBuilder.dimensions(browserDrawOffset + 20, browserDrawOffset - 20, 20, 20);
+        requestBtnBuilder.dimensions(width - browserDrawOffset - 20 - 60, browserDrawOffset - 20, 60, 20);
+        closeBtnBuilder.dimensions(width - browserDrawOffset - 20, browserDrawOffset - 20, 20, 20);
+
+        addDrawableChild(backBtnBuilder.build());
+        addDrawableChild(fwdBtnBuilder.build());
+        addDrawableChild(requestBtnBuilder.build());
+        addDrawableChild(closeBtnBuilder.build());
 
         urlField = new TextFieldWidget(client.textRenderer, browserDrawOffset + 40, browserDrawOffset - 20 + 1, width - browserDrawOffset - 160, 20, Text.of(""));
         urlField.setMaxLength(65535);
@@ -71,7 +79,7 @@ public class VideoRequestBrowser extends Screen {
         urlField.render(matrices, mouseX, mouseY, delta); // The URL bar looks better under everything else
         super.render(matrices, mouseX, mouseY, delta);
         RenderSystem.disableDepthTest();
-        RenderSystem.setShader(GameRenderer::getPositionColorTexShader);
+        RenderSystem.setShader(GameRenderer::getPositionColorTexProgram);
         int glId = browser.renderer.getTextureID();
         RenderSystem.setShaderTexture(0, glId);
         Tessellator t = Tessellator.getInstance();
