@@ -10,9 +10,9 @@
     ]
   },
   "contact": {
-    "homepage": "https://github.com/Chilllyy/CinemaMod-Fabric",
-    "sources": "https://github.com/Chilllyy/CinemaMod-Fabric",
-    "issues": "https://github.com/Chilllyy/CinemaMod-Fabric/issues",
+    "homepage": "https://github.com/CinemaMod/CinemaMod-Fabric",
+    "sources": "https://github.com/CinemaMod/CinemaMod-Fabric",
+    "issues": "https://github.com/CinemaMod/CinemaMod-Fabric/issues",
     "discord": "https://discord.gg/rNrh5kW8Ty"
   },
   "mixins": [

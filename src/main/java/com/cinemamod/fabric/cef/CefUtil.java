@@ -1,18 +1,15 @@
 package com.cinemamod.fabric.cef;
 
 import com.cinemamod.fabric.CinemaModClient;
+import com.cinemamod.fabric.cef.scheme.CefCinemaAppHandler;
 import com.cinemamod.fabric.screen.Screen;
-import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import org.cef.CefApp;
 import org.cef.CefClient;
 import org.cef.CefSettings;
-import org.cef.CefSettings.ColorType;
-import org.cef.browser.CefBrowserOsr;
 
 public final class CefUtil {
 
-    private CefUtil() {
-    }
+    private CefUtil() {}
 
     private static boolean init;
     private static CefApp cefAppInstance;
@@ -31,11 +28,13 @@ public final class CefUtil {
         CefSettings cefSettings = new CefSettings();
         cefSettings.windowless_rendering_enabled = true;
         cefSettings.background_color = cefSettings.new ColorType(0, 255, 255, 255);
-//        cefSettings.cache_path = new File("chromium", "cache").getAbsolutePath();
 
         cefAppInstance = CefApp.getInstance(cefSwitches, cefSettings);
+
+//        CefApp.addAppHandler(new CefCinemaAppHandler(cefSwitches));
+
         cefClientInstance = cefAppInstance.createClient();
-        cefClientInstance.addLoadHandler(new LoadHandler());
+        cefClientInstance.addLoadHandler(new CefBrowserCinemaLoadHandler());
 
         return init = true;
     }
@@ -52,35 +51,20 @@ public final class CefUtil {
         return cefClientInstance;
     }
 
-    public static CefBrowserOsr createBrowser(String startUrl, int widthPx, int heightPx) {
-        if (!init) {
-            return null;
-        }
-
-        CefBrowserOsr browser = (CefBrowserOsr) cefClientInstance.createBrowser(startUrl, true, false);
+    public static CefBrowserCinema createBrowser(String startUrl, int widthPx, int heightPx) {
+        if (!init) return null;
+        CefBrowserCinema browser = new CefBrowserCinema(cefClientInstance, startUrl, false, null);
         browser.setCloseAllowed();
         browser.createImmediately();
-
-        // Adjust screen size
-        {
-            float scale = widthPx / (float) heightPx;
-            int height = CinemaModClient.getInstance().getVideoSettings().getBrowserResolution();
-            int width = (int) Math.floor(height * scale);
-            browser.resize(width, height);
-        }
-
+        browser.resize(widthPx, heightPx);
         return browser;
     }
 
-    public static CefBrowserOsr createBrowser(String startUrl, Screen screen) {
-        if (!init) {
-            return null;
-        }
-
-        CefBrowserOsr browser = (CefBrowserOsr) cefClientInstance.createBrowser(startUrl, true, false);
+    public static CefBrowserCinema createBrowser(String startUrl, Screen screen) {
+        if (!init) return null;
+        CefBrowserCinema browser = new CefBrowserCinema(cefClientInstance, startUrl, true, null);
         browser.setCloseAllowed();
         browser.createImmediately();
-
         // Adjust screen size
         {
             float widthBlocks = screen.getWidth();
@@ -90,17 +74,7 @@ public final class CefUtil {
             int width = (int) Math.floor(height * scale);
             browser.resize(width, height);
         }
-
         return browser;
-    }
-
-    public static void registerCefTick() {
-        ClientTickEvents.START_CLIENT_TICK.register(client -> {
-            if (CefUtil.isInit()) {
-                CefUtil.getCefApp().N_DoMessageLoopWork();
-                CinemaModClient.getInstance().getScreenManager().updateAll();
-            }
-        });
     }
 
 }

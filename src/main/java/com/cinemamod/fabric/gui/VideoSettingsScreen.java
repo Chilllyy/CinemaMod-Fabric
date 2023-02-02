@@ -52,7 +52,7 @@ public class VideoSettingsScreen extends Screen {
             }
         });
         ButtonWidget.Builder screenResolutionBuilder = new Builder(
-            Text.of("Screen Resolution: " + CinemaModClient.getInstance().getVideoSettings().getBrowserResolution() + "p"),
+            Text.of("Screen resolution: " + CinemaModClient.getInstance().getVideoSettings().getBrowserResolution() + "p"),
              button ->
         {
             CinemaModClient.getInstance().getVideoSettings().setNextBrowserResolution();
@@ -61,6 +61,16 @@ public class VideoSettingsScreen extends Screen {
         });
         screenResolutionBuilder.dimensions(method_31362() + 23, 142 + 32, 196, 20);
         addDrawableChild(screenResolutionBuilder.build());
+        ButtonWidget.Builder browserRefreshRateBuilder = new Builder(
+                Text.of("Screen refresh rate: " + CinemaModClient.getInstance().getVideoSettings().getBrowserRefreshRate() + " fps"),
+                button ->
+                {
+                    CinemaModClient.getInstance().getVideoSettings().setNextBrowserRefreshRate();
+                    button.setMessage(Text.of("Screen refresh rate: " + CinemaModClient.getInstance().getVideoSettings().getBrowserRefreshRate() + " fps"));
+                    shouldReloadScreen = true;
+                });
+        browserRefreshRateBuilder.dimensions(method_31362() + 23, 142 + 32 + 32, 196, 20);
+        addDrawableChild(browserRefreshRateBuilder.build());
     }
 
     private int method_31359() {

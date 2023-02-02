@@ -3,8 +3,6 @@ package com.cinemamod.fabric.screen;
 import net.minecraft.util.math.BlockPos;
 
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class ScreenManager {
@@ -65,14 +63,6 @@ public class ScreenManager {
         }
 
         screens.clear();
-    }
-
-    public void updateAll() {
-        for (Screen screen : screens.values()) {
-            if (screen.hasBrowser()) {
-                screen.getBrowser().update();
-            }
-        }
     }
 
 }
