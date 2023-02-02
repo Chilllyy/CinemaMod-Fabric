@@ -7,6 +7,7 @@ import com.cinemamod.fabric.screen.PreviewScreen;
 import com.cinemamod.fabric.screen.PreviewScreenManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 
+import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.render.BufferBuilder;
@@ -94,7 +95,6 @@ public class PreviewScreenBlockEntityRenderer implements BlockEntityRenderer<Pre
     }
 
     public static void register() {
-        BlockEntityRendererFactories.register(PreviewScreenBlockEntity.PREVIEW_SCREEN_BLOCK_ENTITY, PreviewScreenBlockEntityRenderer::new);
+        BlockEntityRendererRegistry.register(PreviewScreenBlockEntity.PREVIEW_SCREEN_BLOCK_ENTITY, PreviewScreenBlockEntityRenderer::new);
     }
-
 }
