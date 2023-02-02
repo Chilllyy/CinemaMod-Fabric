@@ -79,7 +79,7 @@ public class VideoRequestBrowser extends Screen {
         urlField.render(matrices, mouseX, mouseY, delta); // The URL bar looks better under everything else
         super.render(matrices, mouseX, mouseY, delta);
         RenderSystem.disableDepthTest();
-        RenderSystem.setShader(GameRenderer::getPositionColorTexProgram);
+        RenderSystem.setShader(GameRenderer::getPositionColorTexShader);
         int glId = browser.renderer.getTextureID();
         RenderSystem.setShaderTexture(0, glId);
         Tessellator t = Tessellator.getInstance();
