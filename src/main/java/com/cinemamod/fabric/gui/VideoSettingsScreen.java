@@ -6,7 +6,6 @@ import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.gui.widget.CheckboxWidget;
 import net.minecraft.client.gui.widget.SliderWidget;
-import net.minecraft.client.gui.widget.ButtonWidget.Builder;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
@@ -51,26 +50,19 @@ public class VideoSettingsScreen extends Screen {
                 CinemaModClient.getInstance().getVideoSettings().setHideCrosshair(isChecked());
             }
         });
-        ButtonWidget.Builder screenResolutionBuilder = new Builder(
-            Text.of("Screen resolution: " + CinemaModClient.getInstance().getVideoSettings().getBrowserResolution() + "p"),
-             button ->
-        {
+
+        addDrawableChild(new ButtonWidget(method_31362() + 23, 142 + 32, 196, 20, Text.of("Screen Resolution: " + CinemaModClient.getInstance().getVideoSettings().getBrowserResolution() + "p"), button -> {
             CinemaModClient.getInstance().getVideoSettings().setNextBrowserResolution();
-            button.setMessage(Text.of("Screen resolution: " + CinemaModClient.getInstance().getVideoSettings().getBrowserResolution() + "p"));
+            button.setMessage(Text.of("Screen Resolution: " + CinemaModClient.getInstance().getVideoSettings().getBrowserResolution() + "p"));
             shouldReloadScreen = true;
-        });
-        screenResolutionBuilder.dimensions(method_31362() + 23, 142 + 32, 196, 20);
-        addDrawableChild(screenResolutionBuilder.build());
-        ButtonWidget.Builder browserRefreshRateBuilder = new Builder(
-                Text.of("Screen refresh rate: " + CinemaModClient.getInstance().getVideoSettings().getBrowserRefreshRate() + " fps"),
-                button ->
-                {
-                    CinemaModClient.getInstance().getVideoSettings().setNextBrowserRefreshRate();
-                    button.setMessage(Text.of("Screen refresh rate: " + CinemaModClient.getInstance().getVideoSettings().getBrowserRefreshRate() + " fps"));
-                    shouldReloadScreen = true;
-                });
-        browserRefreshRateBuilder.dimensions(method_31362() + 23, 142 + 32 + 32, 196, 20);
-        addDrawableChild(browserRefreshRateBuilder.build());
+        }));
+
+
+        addDrawableChild(new ButtonWidget(method_31362() + 23, 142 + 32 + 32, 196, 20, Text.of("Screen refresh rate: " + CinemaModClient.getInstance().getVideoSettings().getBrowserRefreshRate() + " fps"), button -> {
+            CinemaModClient.getInstance().getVideoSettings().setNextBrowserRefreshRate();
+            button.setMessage(Text.of("Screen refresh rate: " + CinemaModClient.getInstance().getVideoSettings().getBrowserRefreshRate() + " fps"));
+            shouldReloadScreen = true;
+        }));
     }
 
     private int method_31359() {
